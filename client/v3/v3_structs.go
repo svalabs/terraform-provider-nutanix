@@ -1579,6 +1579,36 @@ type NetworkRule struct {
 	ServiceGroupList              []*Reference                   `json:"service_group_list,omitempty" mapstructure:"service_group_list,omitempty"`
 }
 
+type ServiceGroupResponse struct {
+	UUID         *string           `json:"uuid,omitempty" mapstructure:"uuid,omitempty"`
+	ServiceGroup *ServiceGroupSpec `json:"service_group,omitempty" mapstructure:"service_group,omitempty"`
+}
+
+type ServiceListEntry struct {
+	Protocol         *string                        `json:"protocol,omitempty" mapstructure:"protocol,omitempty"`
+	TcpPortRangeList []*PortRange                   `json:"tcp_port_range_list,omitempty" mapstructure:"tcp_port_range_list,omitempty"`
+	UdpPortRangeList []*PortRange                   `json:"udp_port_range_list,omitempty" mapstructure:"udp_port_range_list,omitempty"`
+	IcmpTypeCodeList []*NetworkRuleIcmpTypeCodeList `json:"icmp_type_code_list,omitempty" mapstructure:"icmp_type_code_list,omitempty"`
+}
+
+type ServiceGroupSpec struct {
+	Name        *string             `json:"name,omitempty" mapstructure:"name,omitempty"`
+	Description *string             `json:"description,omitempty" mapstructure:"description,omitempty"`
+	ServiceList []*ServiceListEntry `json:"service_list,omitempty" mapstructure:"service_list,omitempty"`
+}
+
+type ServiceGroupListEntry struct {
+	UUID                   *string           `json:"uuid,omitempty" mapstructure:"uuid,omitempty"`
+	ServiceGroup           *ServiceGroupSpec `json:"service_group,omitempty" mapstructure:"service_group,omitempty"`
+	AssociatedPoliciesList []*Reference      `json:"associated_policies_list,omitempty" mapstructure:"associated_policies_list,omitempty"`
+}
+
+type ServiceGroupListResponse struct {
+	APIVersion string                   `json:"api_version,omitempty"`
+	Entities   []*ServiceGroupListEntry `json:"entities,omitempty"`
+	Metadata   *ListMetadataOutput      `json:"metadata,omitempty"`
+}
+
 // TargetGroup ...
 type TargetGroup struct {
 
