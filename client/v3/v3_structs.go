@@ -1579,6 +1579,33 @@ type NetworkRule struct {
 	ServiceGroupList              []*Reference                   `json:"service_group_list,omitempty" mapstructure:"service_group_list,omitempty"`
 }
 
+type IpAddressBlock struct {
+	Ip  *string `json:"ip,omitempty" mapstructure:"ip,omitempty"`
+	PrefixLength *int64 `json:"prefix_length,omitempty" mapstructure:"prefix_length,omitempty"`
+}
+
+type AddressGroupSpec struct {
+	Name        *string             `json:"name,omitempty" mapstructure:"name,omitempty"`
+	Description *string             `json:"description,omitempty" mapstructure:"description,omitempty"`
+	IpAddressBlockList []*IpAddressBlock `json:"ip_address_block_list,omitempty" mapstructure:"ip_address_block_list,omitempty"`
+	AddressGroupString *string `json:"address_group_string,omitempty" mapstructure:"address_group_string,omitempty"`
+}
+
+type AddressGroupResponse struct {
+	UUID         *string           `json:"uuid,omitempty" mapstructure:"uuid,omitempty"`
+	AddressGroup *AddressGroupSpec `json:"address_group,omitempty" mapstructure:"address_group,omitempty"`
+}
+
+type AddressGroupListEntry struct {
+	AddressGroup           *AddressGroupSpec `json:"address_group,omitempty" mapstructure:"address_group,omitempty"`
+	AssociatedPoliciesList []*Reference      `json:"associated_policies_list,omitempty" mapstructure:"associated_policies_list,omitempty"`
+}
+
+type AddressGroupListResponse struct {
+	Entities   []*AddressGroupListEntry `json:"entities,omitempty"`
+	Metadata   *ListMetadataOutput      `json:"metadata,omitempty"`
+}
+
 type ServiceGroupResponse struct {
 	UUID         *string           `json:"uuid,omitempty" mapstructure:"uuid,omitempty"`
 	ServiceGroup *ServiceGroupSpec `json:"service_group,omitempty" mapstructure:"service_group,omitempty"`
@@ -1604,7 +1631,6 @@ type ServiceGroupListEntry struct {
 }
 
 type ServiceGroupListResponse struct {
-	APIVersion string                   `json:"api_version,omitempty"`
 	Entities   []*ServiceGroupListEntry `json:"entities,omitempty"`
 	Metadata   *ListMetadataOutput      `json:"metadata,omitempty"`
 }
